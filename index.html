@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="data:,">
+<title>PORTAL — うおwのリンク集</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:dark;
+  --bg:#020208;
+  --ink:#f4f6ff;
+  --muted:#9aa6cf;
+  --faint:#6b76a3;
+  --violet:#8b5cf6;
+  --blue:#4d7cfe;
+  --cyan:#38e1d4;
+  --line:rgba(160,180,255,.16);
+  --line-strong:rgba(190,205,255,.34);
+  --glass:linear-gradient(150deg, rgba(255,255,255,.055), rgba(255,255,255,.014) 55%, rgba(140,160,255,.03));
+  --spring:cubic-bezier(.3,1.6,.4,1);
+}
+*{box-sizing:border-box;min-width:0}
+html,body{width:100%;max-width:100%;overflow-x:hidden}
+body{
+  margin:0;color:var(--ink);
+  font-family:"Zen Kaku Gothic New","Hiragino Kaku Gothic ProN",system-ui,sans-serif;
+  -webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%;
+  background:
+    radial-gradient(1100px 640px at 85% -10%, rgba(109,64,230,.34), transparent 62%),
+    radial-gradient(900px 620px at -15% 30%, rgba(38,96,200,.30), transparent 62%),
+    radial-gradient(820px 560px at 55% 115%, rgba(20,150,150,.20), transparent 62%),
+    linear-gradient(170deg,#070a24 0%, #020208 48%, #04051a 100%);
+  background-attachment:fixed;min-height:100vh;position:relative;
+}
+a{color:inherit}
+.en{font-family:"Space Grotesk",monospace;letter-spacing:.22em;text-transform:uppercase}
+
+/* living starfield (canvas) + milky way + nebula */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none}
+.milkyway{position:fixed;inset:-20%;z-index:0;pointer-events:none;
+  background:linear-gradient(118deg, transparent 36%, rgba(170,190,255,.05) 46%, rgba(225,232,255,.09) 50%, rgba(170,190,255,.05) 54%, transparent 64%);
+  filter:blur(7px)}
+.orb{position:fixed;z-index:0;pointer-events:none;border-radius:50%;filter:blur(64px);opacity:.5}
+.orb-a{width:360px;height:360px;top:4%;right:-120px;background:radial-gradient(circle at 38% 38%, rgba(150,110,255,.5), transparent 70%);animation:drift 28s ease-in-out infinite alternate}
+.orb-b{width:300px;height:300px;top:48%;left:-130px;background:radial-gradient(circle at 42% 40%, rgba(70,160,255,.42), transparent 70%);animation:drift 34s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(-40px,56px) scale(1.13)}}
+@media(prefers-reduced-motion:reduce){.orb{animation:none}}
+
+/* ---------- lite mode (default) : animations held back ---------- */
+body.lite .orb{animation:none;opacity:.28}
+body.lite .orbit .ring,body.lite .orbit .ring2{animation:none}
+body.lite .station,body.lite .hero{animation:none}
+body.lite .panel{transition:max-height .25s ease}
+body.lite .row,body.lite .head .chev,body.lite .row .go{transition:none}
+body.lite .station.open{box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 14px 32px rgba(0,0,14,.30)}
+.fx-btn{margin-top:16px;display:inline-flex;align-items:center;gap:9px;cursor:pointer;
+  font:inherit;font-size:12.5px;font-weight:700;color:#e6ecff;
+  padding:10px 18px;border-radius:999px;border:1px solid var(--line-strong);
+  background:linear-gradient(150deg, rgba(255,255,255,.09), rgba(255,255,255,.02));
+  backdrop-filter:blur(3px);transition:transform .35s var(--spring), border-color .3s, box-shadow .3s}
+.fx-btn:active{transform:scale(.95)}
+@media(hover:hover){.fx-btn:hover{border-color:rgba(220,230,255,.6);box-shadow:0 0 20px rgba(110,130,255,.30)}}
+.fx-btn .lamp{width:8px;height:8px;border-radius:50%;background:var(--faint);flex:0 0 auto}
+body:not(.lite) .fx-btn .lamp{background:var(--cyan);box-shadow:0 0 10px var(--cyan)}
+
+.wrap{width:100%;max-width:720px;margin:0 auto;padding:34px 18px 48px;position:relative;z-index:1}
+@media(min-width:720px){.wrap{padding:52px 22px 64px}}
+
+/* ---------- hero : an orbit, not a card ---------- */
+.hero{text-align:center;padding:18px 6px 8px;animation:rise .8s var(--spring) backwards}
+.orbit{position:relative;width:148px;height:148px;margin:0 auto 20px}
+.orbit .planet{position:absolute;inset:38px;border-radius:50%;
+  background:
+    radial-gradient(circle at 32% 28%, rgba(255,255,255,.85), rgba(190,205,255,.35) 26%, transparent 52%),
+    radial-gradient(circle at 68% 78%, rgba(80,70,200,.55), transparent 60%),
+    linear-gradient(150deg,#aebfff 0%, #5d74d8 42%, #1c2560 100%);
+  box-shadow:0 0 44px rgba(110,130,255,.45), inset -14px -16px 34px rgba(2,4,24,.55), inset 6px 8px 18px rgba(255,255,255,.28)}
+.orbit .ring{position:absolute;inset:0;border-radius:50%;border:1px solid rgba(180,200,255,.28);transform:rotateX(68deg) rotateZ(-14deg);animation:spin 14s linear infinite}
+.orbit .ring::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--cyan);box-shadow:0 0 12px var(--cyan)}
+.orbit .ring2{inset:14px;border-color:rgba(180,200,255,.16);animation-duration:22s;animation-direction:reverse}
+.orbit .ring2::after{background:#c9b8ff;box-shadow:0 0 10px #c9b8ff;width:6px;height:6px}
+@keyframes spin{to{transform:rotateX(68deg) rotateZ(346deg)}}
+@media(prefers-reduced-motion:reduce){.orbit .ring,.orbit .ring2{animation:none}}
+.hero .kicker{font-size:11px;color:var(--cyan);margin:0 0 10px}
+h1{font-size:44px;line-height:1.12;margin:0;font-weight:900;letter-spacing:.14em}
+h1 .en{letter-spacing:.3em}
+@media(min-width:720px){h1{font-size:56px}}
+.hero .sub{color:var(--muted);font-size:13.5px;line-height:1.8;margin:14px auto 0;max-width:420px}
+.stats{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.stat{font-size:11px;color:#cfd9ff;padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.03);backdrop-filter:blur(3px)}
+.stat b{color:#fff;font-family:"Space Grotesk";letter-spacing:.08em}
+
+/* ---------- accordion : stations ---------- */
+.acc{margin-top:36px;display:grid;gap:14px}
+.station{position:relative;border-radius:22px;overflow:hidden;background:var(--glass);
+  border:1px solid var(--line);
+  backdrop-filter:blur(3px) saturate(150%);-webkit-backdrop-filter:blur(3px) saturate(150%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.22), 0 14px 32px rgba(0,0,14,.30);
+  transition:border-color .35s ease, box-shadow .35s ease;
+  animation:rise .8s var(--spring) backwards}
+.station:nth-child(2){animation-delay:.08s}
+.station:nth-child(3){animation-delay:.16s}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+.station.open{border-color:var(--line-strong);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3), 0 0 0 1px rgba(140,160,255,.10), 0 0 34px rgba(96,110,255,.20), 0 18px 38px rgba(0,0,14,.34)}
+.station.open::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:linear-gradient(115deg, transparent 30%, rgba(255,255,255,.07) 46%, transparent 60%)}
+.head{width:100%;display:flex;align-items:center;gap:15px;padding:20px 20px;cursor:pointer;background:none;border:0;color:inherit;font:inherit;text-align:left}
+.head .no{font-family:"Space Grotesk";font-size:12px;color:var(--faint);letter-spacing:.18em;flex:0 0 auto}
+.head .dot{flex:0 0 auto;width:11px;height:11px;border-radius:50%;background:var(--c,#8b5cf6);box-shadow:0 0 14px var(--c,#8b5cf6)}
+.head .tt{flex:1 1 auto}
+.head .tt .jp{font-size:18px;font-weight:900;line-height:1.35;display:block}
+.head .tt .en{font-size:10px;color:var(--faint);display:block;margin-top:3px}
+.head .count{flex:0 0 auto;font-family:"Space Grotesk";font-size:11px;color:#cfd9ff;border:1px solid var(--line);border-radius:999px;padding:5px 10px;background:rgba(255,255,255,.03)}
+.head .chev{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:#e6ecff;font-size:15px;transition:transform .5s var(--spring), background .3s}
+.station.open .chev{transform:rotate(45deg);background:rgba(255,255,255,.08)}
+.panel{max-height:0;overflow:hidden;transition:max-height .55s cubic-bezier(.4,0,.2,1)}
+.panel-inner{padding:2px 14px 16px;display:grid;gap:9px}
+
+/* link rows inside a station */
+.row{position:relative;display:flex;align-items:center;gap:13px;text-decoration:none;width:100%;
+  border:1px solid rgba(160,180,255,.13);border-radius:16px;padding:14px 15px;
+  background:linear-gradient(150deg, rgba(255,255,255,.045), rgba(255,255,255,.01));
+  transition:transform .45s var(--spring), border-color .3s, background .3s;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.row:active{transform:scale(.97)}
+@media(hover:hover){.row:hover{border-color:rgba(200,215,255,.4);background:linear-gradient(150deg, rgba(255,255,255,.085), rgba(255,255,255,.02));transform:translateX(4px)}}
+.row .ic{flex:0 0 auto;width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:#dfe7ff;
+  background:radial-gradient(circle at 32% 26%, rgba(255,255,255,.20), rgba(255,255,255,.03) 60%);
+  border:1px solid rgba(255,255,255,.20)}
+.row .ic svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.row .tx{flex:1 1 auto}
+.row .t{font-size:14.5px;font-weight:700;line-height:1.45;display:block}
+.row .d{font-size:12px;color:var(--muted);line-height:1.55;display:block;margin-top:2px}
+.row .lock{font-size:10.5px;color:#ffd9a8;border:1px solid rgba(255,210,150,.35);border-radius:999px;padding:3px 8px;flex:0 0 auto}
+.row .go{flex:0 0 auto;color:var(--faint);font-size:16px;transition:transform .4s var(--spring), color .3s}
+@media(hover:hover){.row:hover .go{transform:translateX(3px);color:#fff}}
+
+.hint{text-align:center;color:var(--faint);font-size:11.5px;margin-top:22px;letter-spacing:.06em}
+footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-height:1.8}
+@media(prefers-reduced-motion:reduce){.station,.hero{animation:none}.panel{transition:none}.row,.head .chev{transition:none}}
+
+/* ---------- password modal ---------- */
+.pw{position:fixed;inset:0;z-index:100;background:rgba(1,2,12,.5);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
+.pw[hidden]{display:none}
+.pw-card{position:relative;border-radius:24px;padding:30px 24px;max-width:380px;width:100%;text-align:center;overflow:hidden;
+  background:linear-gradient(160deg, rgba(30,34,80,.72), rgba(8,10,34,.82));
+  border:1px solid var(--line-strong);box-shadow:0 0 40px rgba(96,110,255,.25), 0 26px 56px rgba(0,0,10,.5);
+  animation:pop .55s var(--spring)}
+@keyframes pop{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.04);opacity:1}100%{transform:scale(1)}}
+.pw-card h2{font-size:18px;margin:0 0 8px}
+.pw-card p{color:var(--muted);font-size:13px;line-height:1.7;margin:0 0 18px}
+.pw-form{display:flex;flex-direction:column;gap:10px}
+.pw-form input{width:100%;border:1px solid var(--line-strong);border-radius:13px;padding:0 14px;min-height:50px;font-size:16px;background:rgba(255,255,255,.04);color:var(--ink);outline:none;text-align:center}
+.pw-form input:focus{border-color:rgba(200,215,255,.7);box-shadow:0 0 0 3px rgba(120,140,255,.22)}
+.pw-form input.err{border-color:#fb7185}
+.pw-btn{border:1px solid rgba(255,255,255,.65);border-radius:13px;min-height:50px;font-size:15px;font-weight:800;cursor:pointer;color:#0a0e24;background:linear-gradient(165deg,#fff,#dbe7ff 55%,#a9c0ff);transition:transform .4s var(--spring)}
+.pw-btn:active{transform:scale(.94)}
+.pw-cancel{border:0;background:none;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;min-height:38px}
+.pw-err{display:none;color:#fb8fa5;font-size:12.5px;font-weight:700}
+.pw-err.show{display:block}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+.shake{animation:shake .4s ease}
+@media(prefers-reduced-motion:reduce){.pw-card,.shake{animation:none}}
+</style>
+</head>
+<body class="lite">
+<canvas id="stars" aria-hidden="true"></canvas>
+<div class="milkyway" aria-hidden="true"></div>
+<div class="orb orb-a" aria-hidden="true"></div>
+<div class="orb orb-b" aria-hidden="true"></div>
+
+<div class="wrap">
+  <header class="hero">
+    <div class="orbit" aria-hidden="true"><span class="ring"></span><span class="ring ring2"></span><span class="planet"></span></div>
+    <p class="kicker en">Uowo — Link Station</p>
+    <h1><span class="en">Portal</span><br>うおwのリンク集</h1>
+    <p class="sub">公開中のサイトを、宇宙ステーションみたいにまとめた場所。<br>見たいステーションを開いて、リンクを選んでね。</p>
+    <div class="stats">
+      <span class="stat"><b>7</b> SITES</span>
+      <span class="stat"><b>3</b> STATIONS</span>
+      <span class="stat"><b>2026.11</b> UPDATED</span>
+    </div>
+    <button class="fx-btn" id="fxBtn" type="button" aria-pressed="false"><span class="lamp" aria-hidden="true"></span><span id="fxLabel">アニメーション強化</span></button>
+  </header>
+
+  <main class="acc" id="acc">
+
+    <section class="station open" style="--c:#8b5cf6" data-station>
+      <button class="head" type="button" aria-expanded="true">
+        <span class="no">01</span><span class="dot" aria-hidden="true"></span>
+        <span class="tt"><span class="jp">勉強</span><span class="en">Study</span></span>
+        <span class="count">4 LINKS</span><span class="chev" aria-hidden="true">＋</span>
+      </button>
+      <div class="panel"><div class="panel-inner">
+        <a class="row" href="https://venerable-llama-cc2a89.netlify.app/" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2.5h6"/></svg></span>
+          <span class="tx"><span class="t">ゲーマー勉強アプリ — 共有版（二学期期末テスト）</span><span class="d">タイマー＋BGM＋みんなで見られる共有タイムライン</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="https://hkb114514.netlify.app/" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2.5h6"/></svg></span>
+          <span class="tx"><span class="t">二学期期末テスト(2)</span><span class="d">タイマー＋BGM＋みんなで見られる共有タイムライン</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="https://yaju810114514.netlify.app/" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.7 2.6 4 5.6 4 9s-1.3 6.4-4 9c-2.7-2.6-4-5.6-4-9s1.3-6.4 4-9z"/></svg></span>
+          <span class="tx"><span class="t">地理クイズ</span><span class="d">ヨーロッパ・アフリカ・北アメリカ 114問、地図・雨温図つき</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+        <button class="row gated" type="button" data-name="歴史クイズ — 共有版（AIなし）" data-url="https://muse.ai/s/li-shi-kuizu-gong-you-ban-su6uoxp2zxaaxo/rQZaelBSda5zyE6afceZxw9u9gPL1wtZSJHmUst2xGI">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M6 3h12a1 1 0 0 1 1 1v17l-3.5-2.5L12 21l-3.5-2.5L5 21V4a1 1 0 0 1 1-1z"/><path d="M9 8h6M9 12h6"/></svg></span>
+          <span class="tx"><span class="t">歴史クイズ — 共有版（AIなし）</span><span class="d">飛鳥・奈良・平安 92問、友だちに配れる版</span></span>
+          <span class="lock">パスワード必須</span><span class="go" aria-hidden="true">→</span>
+        </button>
+      </div></div>
+    </section>
+
+    <section class="station" style="--c:#38e1d4" data-station>
+      <button class="head" type="button" aria-expanded="false">
+        <span class="no">02</span><span class="dot" aria-hidden="true"></span>
+        <span class="tt"><span class="jp">ゲーム</span><span class="en">Games</span></span>
+        <span class="count">2 LINKS</span><span class="chev" aria-hidden="true">＋</span>
+      </button>
+      <div class="panel"><div class="panel-inner">
+        <a class="row" href="https://muse.ai/s/minigemuapuri-gong-you-ban-xfy6sxs0zcwxn5/z6LFdjwLFeFCN1rXw3kWSeI_i09Ts55WMXTvgHHtfJ4" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M6 9h12a5 5 0 0 1 5 5c0 2.8-2.2 5-5 5-1.2 0-2.3-.4-3.1-1.1L13.5 16h-3L9.1 17.9C8.3 18.6 7.2 19 6 19 3.2 19 1 16.8 1 14a5 5 0 0 1 5-5z" transform="scale(.92) translate(1,0)"/><path d="M7 12v4M5 14h4"/><circle cx="16.5" cy="13" r=".6" fill="currentColor"/><circle cx="18.5" cy="15.5" r=".6" fill="currentColor"/></svg></span>
+          <span class="tx"><span class="t">ミニゲームアプリ — 共有版</span><span class="d">13ゲーム＋ガチャ、誰でも開ける版</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+        <a class="row" href="https://muse.ai/s/minigemuapuri-liquid-glassgong-you-ban-xgxn6ti9v2xbxqxq/rmn1R09ZxFwVcJ31i67NbjkwG3vQpYX-9xyxkgpNhVI" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l7 9-7 9-7-9 7-9z"/><path d="M5 12h14M12 3l-3.5 9L12 21l3.5-9L12 3z"/></svg></span>
+          <span class="tx"><span class="t">ミニゲーム — Liquid Glass 共有版</span><span class="d">ガラスデザインの13ゲーム、旧共有版とは別リンク</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+      </div></div>
+    </section>
+
+    <section class="station" style="--c:#4d7cfe" data-station>
+      <button class="head" type="button" aria-expanded="false">
+        <span class="no">03</span><span class="dot" aria-hidden="true"></span>
+        <span class="tt"><span class="jp">ツール・その他</span><span class="en">Tools &amp; Others</span></span>
+        <span class="count">1 LINK</span><span class="chev" aria-hidden="true">＋</span>
+      </button>
+      <div class="panel"><div class="panel-inner">
+        <a class="row" href="https://famous-blancmange-aad411.netlify.app" target="_blank" rel="noopener">
+          <span class="ic"><svg viewBox="0 0 24 24"><rect x="3" y="4.5" width="18" height="15" rx="2.5"/><path d="M3 9h18M6.5 7h.01M9 7h.01"/></svg></span>
+          <span class="tx"><span class="t">ブラウザアプリ（ytr制作）</span><span class="d">サイト内ブラウザ＋SNS「お、おう」</span></span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+      </div></div>
+    </section>
+  </main>
+
+  <p class="hint">ステーションをタップで開閉できます</p>
+  <footer>うおw のポータル — 2026.11.18</footer>
+</div>
+
+<div class="pw" id="pwModal" hidden role="dialog" aria-modal="true" aria-labelledby="pwTitle">
+  <div class="pw-card" id="pwCard">
+    <h2 id="pwTitle">パスワードが必要です</h2>
+    <p><span id="pwTarget">歴史クイズ</span>を開くには<br>パスワードを入力してね。</p>
+    <form class="pw-form" id="pwForm">
+      <input id="pwInput" type="password" placeholder="パスワード" autocomplete="current-password" autocapitalize="off" autocorrect="off" spellcheck="false" aria-label="パスワード">
+      <div class="pw-err" id="pwErr">パスワードが違います。もう一度入力してね。</div>
+      <button class="pw-btn" type="submit">開く</button>
+      <button class="pw-cancel" type="button" id="pwCancel">やめる</button>
+    </form>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  /* ---------- accordion : one station open at a time ---------- */
+  var stations=[].slice.call(document.querySelectorAll("[data-station]"));
+  function setPanel(st,open){
+    var panel=st.querySelector(".panel"), head=st.querySelector(".head");
+    st.classList.toggle("open",open);
+    head.setAttribute("aria-expanded",open?"true":"false");
+    panel.style.maxHeight=open?panel.scrollHeight+"px":"0px";
+  }
+  stations.forEach(function(st){
+    setPanel(st, st.classList.contains("open"));
+    st.querySelector(".head").addEventListener("click",function(){
+      var willOpen=!st.classList.contains("open");
+      stations.forEach(function(s){ setPanel(s, s===st?willOpen:false); });
+    });
+  });
+  window.addEventListener("resize",function(){
+    stations.forEach(function(st){ if(st.classList.contains("open")) setPanel(st,true); });
+  });
+
+  /* ---------- living starfield : twinkle + parallax + shooting stars ---------- */
+  var cv=document.getElementById("stars"), ctx=cv.getContext("2d");
+  var reduce=window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var fxFull=false, rafId=null;
+  var W=0,H=0,stars=[],mx=0,my=0,shoot=null,nextShoot=performance.now()+3500;
+  function build(){
+    W=cv.width=window.innerWidth; H=cv.height=window.innerHeight;
+    var n=Math.min(210, Math.floor(W*H/6500)); stars=[];
+    for(var i=0;i<n;i++){
+      stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.3,
+        p:Math.random()*Math.PI*2, s:.008+Math.random()*.02, d:Math.random()*.9+.1,
+        hue:Math.random()<.12?"255,225,163":(Math.random()<.3?"190,215,255":"255,255,255")});
+    }
+  }
+  function frame(now){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var st=stars[i]; st.p+=st.s;
+      var a=.35+.65*Math.abs(Math.sin(st.p));
+      ctx.beginPath();
+      ctx.arc(st.x+mx*14*st.d, st.y+my*10*st.d, st.r, 0, Math.PI*2);
+      ctx.fillStyle="rgba("+st.hue+","+a.toFixed(3)+")"; ctx.fill();
+    }
+    if(!shoot && now>nextShoot){
+      shoot={x:W*(.35+Math.random()*.6), y:H*Math.random()*.35, vx:-(5+Math.random()*4), vy:3+Math.random()*2, life:1};
+    }
+    if(shoot){
+      shoot.x+=shoot.vx; shoot.y+=shoot.vy; shoot.life-=.016;
+      var grad=ctx.createLinearGradient(shoot.x,shoot.y,shoot.x-shoot.vx*11,shoot.y-shoot.vy*11);
+      grad.addColorStop(0,"rgba(255,255,255,"+(.9*Math.max(shoot.life,0)).toFixed(3)+")");
+      grad.addColorStop(1,"rgba(255,255,255,0)");
+      ctx.strokeStyle=grad; ctx.lineWidth=2; ctx.beginPath();
+      ctx.moveTo(shoot.x,shoot.y); ctx.lineTo(shoot.x-shoot.vx*11,shoot.y-shoot.vy*11); ctx.stroke();
+      if(shoot.life<=0||shoot.x<-80||shoot.y>H+80){ shoot=null; nextShoot=now+5000+Math.random()*6000; }
+    }
+    if(fxFull && !reduce) rafId=requestAnimationFrame(frame);
+  }
+  /* lite mode: draw the starfield once, no loop / twinkle / parallax / shooting stars */
+  function drawStatic(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var st=stars[i];
+      ctx.beginPath(); ctx.arc(st.x, st.y, st.r, 0, Math.PI*2);
+      ctx.fillStyle="rgba("+st.hue+",.75)"; ctx.fill();
+    }
+  }
+  function applyFx(){
+    document.body.classList.toggle("lite", !fxFull);
+    var btn=document.getElementById("fxBtn"), label=document.getElementById("fxLabel");
+    if(btn){ btn.setAttribute("aria-pressed", fxFull?"true":"false"); }
+    if(label){ label.textContent=fxFull?"アニメーションを軽くする":"アニメーション強化"; }
+    if(rafId){ cancelAnimationFrame(rafId); rafId=null; }
+    shoot=null;
+    if(fxFull && !reduce){ nextShoot=performance.now()+2500; rafId=requestAnimationFrame(frame); }
+    else { drawStatic(); }
+  }
+  build(); window.addEventListener("resize",function(){ build(); if(!fxFull) drawStatic(); });
+  window.addEventListener("pointermove",function(e){ mx=e.clientX/window.innerWidth-.5; my=e.clientY/window.innerHeight-.5; });
+  document.getElementById("fxBtn").addEventListener("click",function(){ fxFull=!fxFull; applyFx(); });
+  applyFx();
+
+  /* ---------- password gate (history quiz only) ---------- */
+  var EXPECTED='435b9b8f9e5c13152a0c1ac8f71dea677ed9acd74cdbfc3529acc1173df51866';
+  var modal=document.getElementById('pwModal'), card=document.getElementById('pwCard'),
+      form=document.getElementById('pwForm'), input=document.getElementById('pwInput'),
+      err=document.getElementById('pwErr'), target=document.getElementById('pwTarget'),
+      cancel=document.getElementById('pwCancel');
+  var pending=null;
+  function sha256Sync(ascii){
+    function rr(v,a){ return (v>>>a)|(v<<(32-a)); }
+    var mathPow=Math.pow, maxWord=mathPow(2,32), i, j, result='';
+    var words=[], asciiBitLength=ascii.length*8;
+    var hash=sha256Sync.h=sha256Sync.h||[], k=sha256Sync.k=sha256Sync.k||[];
+    var primeCounter=k.length, isComposite={};
+    for(var candidate=2; primeCounter<64; candidate++){
+      if(!isComposite[candidate]){
+        for(i=0;i<313;i+=candidate){ isComposite[i]=candidate; }
+        hash[primeCounter]=(mathPow(candidate,.5)*maxWord)|0;
+        k[primeCounter++]=(mathPow(candidate,1/3)*maxWord)|0;
+      }
+    }
+    ascii+='\x80';
+    while(ascii.length%64-56) ascii+='\x00';
+    for(i=0;i<ascii.length;i++){
+      j=ascii.charCodeAt(i);
+      if(j>>8) return sha256Sync(unescape(encodeURIComponent(ascii)));
+      words[i>>2]|=j<<((3-i)%4)*8;
+    }
+    words[words.length]=(asciiBitLength/maxWord)|0;
+    words[words.length]=(asciiBitLength);
+    for(j=0;j<words.length;){
+      var w=words.slice(j,j+=16), oldHash=hash;
+      hash=hash.slice(0,8);
+      for(i=0;i<64;i++){
+        var w15=w[i-15], w2=w[i-2];
+        var a=hash[0], e=hash[4];
+        var temp1=hash[7]
+          +(rr(e,6)^rr(e,11)^rr(e,25))
+          +((e&hash[5])^((~e)&hash[6]))
+          +k[i]
+          +(w[i]=(i<16)?w[i]:(w[i-16]+(rr(w15,7)^rr(w15,18)^(w15>>>3))+w[i-7]+(rr(w2,17)^rr(w2,19)^(w2>>>10)))|0);
+        var temp2=(rr(a,2)^rr(a,13)^rr(a,22))+((a&hash[1])^(a&hash[2])^(hash[1]&hash[2]));
+        hash=[(temp1+temp2)|0].concat(hash);
+        hash[4]=(hash[4]+temp1)|0;
+      }
+      for(i=0;i<8;i++){ hash[i]=(hash[i]+oldHash[i])|0; }
+    }
+    for(i=0;i<8;i++){
+      for(j=3;j+1;j--){
+        var b=(hash[i]>>(j*8))&255;
+        result+=((b<16)?0:'')+b.toString(16);
+      }
+    }
+    return result;
+  }
+  function sha256Hex(str){
+    if(window.crypto && crypto.subtle && crypto.subtle.digest && window.isSecureContext){
+      return crypto.subtle.digest('SHA-256', new TextEncoder().encode(str)).then(function(buf){
+        return [].map.call(new Uint8Array(buf), function(b){ return ('0'+b.toString(16)).slice(-2); }).join('');
+      }).catch(function(){ return sha256Sync(str); });
+    }
+    return Promise.resolve(sha256Sync(str));
+  }
+  function openModal(btn){
+    pending={ url: btn.getAttribute('data-url'), btn: btn };
+    target.textContent=btn.getAttribute('data-name')||'歴史クイズ';
+    input.value=''; err.classList.remove('show'); input.classList.remove('err');
+    modal.hidden=false;
+    setTimeout(function(){ try{ input.focus(); }catch(_){} }, 50);
+  }
+  function closeModal(){
+    modal.hidden=true;
+    if(pending && pending.btn){ try{ pending.btn.focus(); }catch(_){} }
+    pending=null;
+  }
+  function fail(){
+    err.classList.add('show'); input.classList.add('err');
+    card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
+    input.select();
+  }
+  var gated=document.querySelectorAll('.gated');
+  for(var i=0;i<gated.length;i++){ gated[i].addEventListener('click', function(){ openModal(this); }); }
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var val=input.value;
+    if(!val || !pending){ fail(); return; }
+    var dest=pending;
+    sha256Hex(val).then(function(hex){
+      if(hex===EXPECTED){
+        var url=dest.url; closeModal();
+        if(url){ window.open(url, '_blank', 'noopener'); }
+      } else { fail(); }
+    }).catch(function(){ fail(); });
+  });
+  cancel.addEventListener('click', closeModal);
+  modal.addEventListener('click', function(e){ if(e.target===modal){ closeModal(); } });
+  document.addEventListener('keydown', function(e){ if(e.key==='Escape' && !modal.hidden){ closeModal(); } });
+  input.addEventListener('input', function(){ err.classList.remove('show'); input.classList.remove('err'); });
+})();
+</script>
+</body>
+</html>
