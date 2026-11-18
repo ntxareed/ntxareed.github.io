@@ -144,6 +144,55 @@ h1 .en{letter-spacing:.3em}
 footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-height:1.8}
 @media(prefers-reduced-motion:reduce){.station,.hero{animation:none}.panel{transition:none}.row,.head .chev{transition:none}}
 
+/* ---------- OVERDRIVE : full mode only (body without .lite) ---------- */
+.aurora{position:fixed;inset:-32%;z-index:0;pointer-events:none;opacity:0;transition:opacity .9s ease;
+  background:conic-gradient(from 0deg at 50% 50%, rgba(139,92,246,.13), rgba(77,124,254,.10), rgba(56,225,212,.09), rgba(230,110,200,.11), rgba(139,92,246,.13));
+  filter:blur(52px)}
+body:not(.lite) .aurora{opacity:1;animation:auroraSpin 38s linear infinite}
+@keyframes auroraSpin{to{transform:rotate(360deg)}}
+#glow{position:fixed;left:0;top:0;width:360px;height:360px;margin:-180px 0 0 -180px;border-radius:50%;
+  pointer-events:none;z-index:0;opacity:0;transition:opacity .6s ease;mix-blend-mode:screen;
+  background:radial-gradient(circle, rgba(140,160,255,.22), rgba(140,160,255,.06) 42%, transparent 66%)}
+body:not(.lite) #glow{opacity:1}
+.marquee{overflow:hidden;margin-top:32px;padding:9px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.marquee-track{display:flex;width:max-content;white-space:nowrap}
+.marquee-track span{font-family:"Space Grotesk",monospace;font-size:11px;letter-spacing:.34em;color:var(--faint);padding-right:18px}
+.marquee-track b{color:var(--cyan);font-weight:500}
+body:not(.lite) .marquee-track{animation:marq 18s linear infinite}
+@keyframes marq{to{transform:translateX(-50%)}}
+h1 .en .ch{display:inline-block}
+body:not(.lite) h1 .en .ch{
+  background:linear-gradient(90deg,#ffffff,#a9c6ff,#38e1d4,#c9b8ff,#ffffff);
+  background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:shimmer 5s linear infinite, charFloat 3.4s ease-in-out infinite alternate;
+  animation-delay:calc(var(--i)*.1s), calc(var(--i)*.16s)}
+@keyframes shimmer{to{background-position:300% 0}}
+@keyframes charFloat{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+body:not(.lite) .orbit .planet{animation:planetPulse 4.6s ease-in-out infinite alternate}
+@keyframes planetPulse{
+  from{box-shadow:0 0 44px rgba(110,130,255,.45), inset -14px -16px 34px rgba(2,4,24,.55), inset 6px 8px 18px rgba(255,255,255,.28)}
+  to{box-shadow:0 0 78px rgba(120,140,255,.8), inset -14px -16px 34px rgba(2,4,24,.55), inset 6px 8px 18px rgba(255,255,255,.34)}}
+body:not(.lite) .station{transition:transform .3s ease, border-color .35s ease, box-shadow .35s ease}
+body:not(.lite) .station.open .row{animation:rowIn .55s var(--spring) both;animation-delay:calc(var(--n,0)*75ms)}
+@keyframes rowIn{from{opacity:0;transform:translateX(-16px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
+body:not(.lite) .row{overflow:hidden}
+body:not(.lite) .row::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(105deg, transparent 42%, rgba(255,255,255,.14) 50%, transparent 58%);
+  transform:translateX(-130%)}
+body:not(.lite) .row:hover::after{transform:translateX(130%);transition:transform .8s ease}
+body:not(.lite) .row:hover .ic{animation:iconPop .6s var(--spring)}
+@keyframes iconPop{0%{transform:rotate(0) scale(1)}50%{transform:rotate(-10deg) scale(1.2)}100%{transform:rotate(0) scale(1)}}
+body:not(.lite) .fx-btn{animation:btnGlow 2.4s ease-in-out infinite alternate}
+@keyframes btnGlow{from{box-shadow:0 0 6px rgba(56,225,212,.12)}to{box-shadow:0 0 26px rgba(56,225,212,.5)}}
+body.warping .wrap{animation:warpShake .5s ease}
+@keyframes warpShake{0%,100%{transform:translate(0,0)}20%{transform:translate(-3px,2px)}40%{transform:translate(3px,-2px)}60%{transform:translate(-2px,-1px)}80%{transform:translate(2px,1px)}}
+.acc{perspective:1100px}
+@media(prefers-reduced-motion:reduce){
+  body:not(.lite) .aurora,body:not(.lite) .marquee-track,body:not(.lite) h1 .en .ch,
+  body:not(.lite) .orbit .planet,body:not(.lite) .station.open .row,body:not(.lite) .fx-btn{animation:none}
+  body:not(.lite) h1 .en .ch{color:var(--ink)}
+}
+
 /* ---------- password modal ---------- */
 .pw{position:fixed;inset:0;z-index:100;background:rgba(1,2,12,.5);display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)}
 .pw[hidden]{display:none}
@@ -173,12 +222,14 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
 <div class="milkyway" aria-hidden="true"></div>
 <div class="orb orb-a" aria-hidden="true"></div>
 <div class="orb orb-b" aria-hidden="true"></div>
+<div class="aurora" aria-hidden="true"></div>
+<div id="glow" aria-hidden="true"></div>
 
 <div class="wrap">
   <header class="hero">
     <div class="orbit" aria-hidden="true"><span class="ring"></span><span class="ring ring2"></span><span class="planet"></span></div>
-    <p class="kicker en">Uowo — Link Station</p>
-    <h1><span class="en">Portal</span><br>うおwのリンク集</h1>
+    <p class="kicker en">Reed — Link Station</p>
+    <h1><span class="en">Portal</span><br>りーどのリンク集</h1>
     <p class="sub">公開中のサイトを、宇宙ステーションみたいにまとめた場所。<br>見たいステーションを開いて、リンクを選んでね。</p>
     <div class="stats">
       <span class="stat"><b>7</b> SITES</span>
@@ -187,6 +238,8 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
     </div>
     <button class="fx-btn" id="fxBtn" type="button" aria-pressed="false"><span class="lamp" aria-hidden="true"></span><span id="fxLabel">アニメーション強化</span></button>
   </header>
+
+  <div class="marquee" aria-hidden="true"><div class="marquee-track" id="marqueeTrack"></div></div>
 
   <main class="acc" id="acc">
 
@@ -257,7 +310,7 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
   </main>
 
   <p class="hint">ステーションをタップで開閉できます</p>
-  <footer>うおw のポータル — 2026.11.18</footer>
+  <footer>りーどのポータル — 2026.11.18</footer>
 </div>
 
 <div class="pw" id="pwModal" hidden role="dialog" aria-modal="true" aria-labelledby="pwTitle">
@@ -295,28 +348,54 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
     stations.forEach(function(st){ if(st.classList.contains("open")) setPanel(st,true); });
   });
 
-  /* ---------- living starfield : twinkle + parallax + shooting stars ---------- */
+  /* ---------- starfield OVERDRIVE : twinkle + warp + trail + bursts ---------- */
   var cv=document.getElementById("stars"), ctx=cv.getContext("2d");
   var reduce=window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var fxFull=false, rafId=null;
+  var finePointer=window.matchMedia && window.matchMedia("(pointer: fine)").matches;
+  var fxFull=false, rafId=null, warpUntil=0;
   var W=0,H=0,stars=[],mx=0,my=0,shoot=null,nextShoot=performance.now()+3500;
+  var parts=[], ripples=[];
+  var glowEl=document.getElementById("glow"), gx=window.innerWidth/2, gy=window.innerHeight/3, tx=gx, ty=gy;
+  var HUES=["190,215,255","255,255,255","160,240,230","200,180,255","255,225,163"];
   function build(){
     W=cv.width=window.innerWidth; H=cv.height=window.innerHeight;
-    var n=Math.min(210, Math.floor(W*H/6500)); stars=[];
+    var n=Math.min(230, Math.floor(W*H/6000)); stars=[];
     for(var i=0;i<n;i++){
       stars.push({x:Math.random()*W, y:Math.random()*H, r:Math.random()*1.4+.3,
         p:Math.random()*Math.PI*2, s:.008+Math.random()*.02, d:Math.random()*.9+.1,
-        hue:Math.random()<.12?"255,225,163":(Math.random()<.3?"190,215,255":"255,255,255")});
+        hue:HUES[Math.floor(Math.random()*HUES.length)]});
     }
+  }
+  function spawn(x,y,vx,vy,life,r,hue){
+    if(parts.length>170) parts.shift();
+    parts.push({x:x,y:y,vx:vx,vy:vy,life:life,max:life,r:r,hue:hue});
+  }
+  function burst(x,y,n){
+    for(var i=0;i<n;i++){
+      var a=Math.random()*Math.PI*2, sp=1+Math.random()*4.2;
+      spawn(x,y,Math.cos(a)*sp,Math.sin(a)*sp,34+Math.random()*26,1+Math.random()*1.8,HUES[Math.floor(Math.random()*HUES.length)]);
+    }
+    ripples.push({x:x,y:y,r:6,life:1});
+    if(ripples.length>6) ripples.shift();
   }
   function frame(now){
     ctx.clearRect(0,0,W,H);
+    var cx=W/2, cy=H/2, warping=now<warpUntil;
     for(var i=0;i<stars.length;i++){
       var st=stars[i]; st.p+=st.s;
       var a=.35+.65*Math.abs(Math.sin(st.p));
-      ctx.beginPath();
-      ctx.arc(st.x+mx*14*st.d, st.y+my*10*st.d, st.r, 0, Math.PI*2);
-      ctx.fillStyle="rgba("+st.hue+","+a.toFixed(3)+")"; ctx.fill();
+      if(warping){
+        var dx=st.x-cx, dy=st.y-cy;
+        var px=st.x, py=st.y;
+        st.x+=dx*.016*st.d+dx*.002; st.y+=dy*.016*st.d+dy*.002;
+        ctx.strokeStyle="rgba("+st.hue+","+(a*.85).toFixed(3)+")"; ctx.lineWidth=st.r;
+        ctx.beginPath(); ctx.moveTo(px-(st.x-px)*5, py-(st.y-py)*5); ctx.lineTo(st.x, st.y); ctx.stroke();
+        if(st.x<-30||st.x>W+30||st.y<-30||st.y>H+30){ st.x=Math.random()*W; st.y=Math.random()*H; }
+      } else {
+        ctx.beginPath();
+        ctx.arc(st.x+mx*14*st.d, st.y+my*10*st.d, st.r, 0, Math.PI*2);
+        ctx.fillStyle="rgba("+st.hue+","+a.toFixed(3)+")"; ctx.fill();
+      }
     }
     if(!shoot && now>nextShoot){
       shoot={x:W*(.35+Math.random()*.6), y:H*Math.random()*.35, vx:-(5+Math.random()*4), vy:3+Math.random()*2, life:1};
@@ -328,8 +407,22 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
       grad.addColorStop(1,"rgba(255,255,255,0)");
       ctx.strokeStyle=grad; ctx.lineWidth=2; ctx.beginPath();
       ctx.moveTo(shoot.x,shoot.y); ctx.lineTo(shoot.x-shoot.vx*11,shoot.y-shoot.vy*11); ctx.stroke();
-      if(shoot.life<=0||shoot.x<-80||shoot.y>H+80){ shoot=null; nextShoot=now+5000+Math.random()*6000; }
+      if(shoot.life<=0||shoot.x<-80||shoot.y>H+80){ shoot=null; nextShoot=now+2600+Math.random()*3800; }
     }
+    for(var j=parts.length-1;j>=0;j--){
+      var pt=parts[j]; pt.x+=pt.vx; pt.y+=pt.vy; pt.vx*=.96; pt.vy*=.96; pt.life--;
+      if(pt.life<=0){ parts.splice(j,1); continue; }
+      ctx.beginPath(); ctx.arc(pt.x,pt.y,pt.r*(pt.life/pt.max),0,Math.PI*2);
+      ctx.fillStyle="rgba("+pt.hue+","+(.85*pt.life/pt.max).toFixed(3)+")"; ctx.fill();
+    }
+    for(var k=ripples.length-1;k>=0;k--){
+      var rp=ripples[k]; rp.r+=3.4; rp.life-=.03;
+      if(rp.life<=0){ ripples.splice(k,1); continue; }
+      ctx.beginPath(); ctx.arc(rp.x,rp.y,rp.r,0,Math.PI*2);
+      ctx.strokeStyle="rgba(170,200,255,"+(.5*rp.life).toFixed(3)+")"; ctx.lineWidth=1.4; ctx.stroke();
+    }
+    gx+=(tx-gx)*.09; gy+=(ty-gy)*.09;
+    if(glowEl) glowEl.style.transform="translate("+gx+"px,"+gy+"px)";
     if(fxFull && !reduce) rafId=requestAnimationFrame(frame);
   }
   /* lite mode: draw the starfield once, no loop / twinkle / parallax / shooting stars */
@@ -347,13 +440,70 @@ footer{margin-top:34px;text-align:center;color:var(--faint);font-size:11px;line-
     if(btn){ btn.setAttribute("aria-pressed", fxFull?"true":"false"); }
     if(label){ label.textContent=fxFull?"アニメーションを軽くする":"アニメーション強化"; }
     if(rafId){ cancelAnimationFrame(rafId); rafId=null; }
-    shoot=null;
-    if(fxFull && !reduce){ nextShoot=performance.now()+2500; rafId=requestAnimationFrame(frame); }
-    else { drawStatic(); }
+    shoot=null; parts=[]; ripples=[];
+    if(fxFull && !reduce){
+      warpUntil=performance.now()+1150;
+      document.body.classList.add("warping");
+      setTimeout(function(){ document.body.classList.remove("warping"); }, 560);
+      burst(W/2, H/3, 30);
+      nextShoot=performance.now()+2200; rafId=requestAnimationFrame(frame);
+    } else { drawStatic(); }
   }
   build(); window.addEventListener("resize",function(){ build(); if(!fxFull) drawStatic(); });
-  window.addEventListener("pointermove",function(e){ mx=e.clientX/window.innerWidth-.5; my=e.clientY/window.innerHeight-.5; });
+  var lastTrail=0;
+  window.addEventListener("pointermove",function(e){
+    mx=e.clientX/window.innerWidth-.5; my=e.clientY/window.innerHeight-.5;
+    tx=e.clientX; ty=e.clientY;
+    if(fxFull && !reduce){
+      var now=performance.now();
+      if(now-lastTrail>24){ lastTrail=now; spawn(e.clientX,e.clientY,(Math.random()-.5)*.6,(Math.random()-.5)*.6,20+Math.random()*14,.8+Math.random()*1.1,HUES[Math.floor(Math.random()*HUES.length)]); }
+    }
+  });
+  window.addEventListener("pointerdown",function(e){ if(fxFull && !reduce) burst(e.clientX,e.clientY,22); });
   document.getElementById("fxBtn").addEventListener("click",function(){ fxFull=!fxFull; applyFx(); });
+
+  /* ---------- overdrive dressing : split title, marquee, row numbers ---------- */
+  (function(){
+    var en=document.querySelector("h1 .en");
+    if(en){
+      var txt=en.textContent, out="";
+      for(var i=0;i<txt.length;i++){ out+='<span class="ch" style="--i:'+i+'">'+txt[i]+"</span>"; }
+      en.innerHTML=out;
+    }
+    var track=document.getElementById("marqueeTrack");
+    if(track){
+      var seg='<span>STUDY <b>✦</b> GAMES <b>✦</b> TOOLS <b>✦</b> PORTAL <b>✦</b> REED LINK STATION <b>✦</b> </span>';
+      track.innerHTML=seg+seg+seg+seg;
+    }
+    var inners=document.querySelectorAll(".panel-inner");
+    for(var a=0;a<inners.length;a++){
+      var kids=inners[a].children;
+      for(var b=0;b<kids.length;b++){ kids[b].style.setProperty("--n", b); }
+    }
+  })();
+
+  /* ---------- overdrive touch : 3D tilt on stations + magnetic fx button ---------- */
+  if(finePointer){
+    stations.forEach(function(st){
+      st.addEventListener("pointermove",function(e){
+        if(!fxFull || reduce) return;
+        var r=st.getBoundingClientRect();
+        var rx=((e.clientY-r.top)/r.height-.5)*-5, ry=((e.clientX-r.left)/r.width-.5)*5;
+        st.style.transform="rotateX("+rx.toFixed(2)+"deg) rotateY("+ry.toFixed(2)+"deg)";
+      });
+      st.addEventListener("pointerleave",function(){ st.style.transform=""; });
+    });
+    var fxBtn=document.getElementById("fxBtn");
+    if(fxBtn){
+      fxBtn.addEventListener("pointermove",function(e){
+        if(!fxFull || reduce) return;
+        var r=fxBtn.getBoundingClientRect();
+        var dx=(e.clientX-(r.left+r.width/2))*.16, dy=(e.clientY-(r.top+r.height/2))*.28;
+        fxBtn.style.transform="translate("+dx.toFixed(1)+"px,"+dy.toFixed(1)+"px)";
+      });
+      fxBtn.addEventListener("pointerleave",function(){ fxBtn.style.transform=""; });
+    }
+  }
   applyFx();
 
   /* ---------- password gate (history quiz only) ---------- */
